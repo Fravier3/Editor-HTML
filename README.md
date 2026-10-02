@@ -31,7 +31,7 @@ No publiques el ZIP como único archivo: hay que extraerlo. No hace falta Androi
 
 ## Cómo ejecuta los proyectos
 
-La app guarda proyectos en IndexedDB y un service worker sirve los archivos mediante rutas virtuales bajo `__preview__/ID/`. Así funcionan los enlaces relativos, hojas CSS, scripts clásicos, imágenes y navegación entre HTML. También pueden funcionar módulos y fetch según las políticas de origen y CORS del navegador; compruébalos con tu proyecto.
+La app guarda los recursos como bytes en IndexedDB (evitando guardar objetos Blob directamente) y reconstruye los archivos al abrirlos. Las escrituras se realizan en una sola transacción y se conservan los datos del formato anterior. La app guarda proyectos en IndexedDB y un service worker sirve los archivos mediante rutas virtuales bajo `__preview__/ID/`. Así funcionan los enlaces relativos, hojas CSS, scripts clásicos, imágenes y navegación entre HTML. También pueden funcionar módulos y fetch según las políticas de origen y CORS del navegador; compruébalos con tu proyecto.
 
 El modo predeterminado es **Compatibilidad**, pensado para tu propio código. El iframe permite scripts y `allow-same-origin`: admite almacenamiento y más APIs, pero el código comparte el origen de esta app y puede acceder a sus datos. No ejecutes código desconocido en ese modo. Desactívalo en ajustes para aislar el origen; algunas APIs y la carga de recursos locales pueden dejar de funcionar según el navegador. Ese aislamiento no bloquea Internet, formularios, ventanas emergentes ni descargas; no es un entorno para analizar código malicioso.
 
@@ -62,3 +62,7 @@ Abre `http://localhost:8000`. En GitHub Pages no necesitas este paso.
 ## Archivos
 
 `index.html`: interfaz. `style.css`: diseño responsive. `app.js`: edición, proyectos, IndexedDB, importación y exportación. `sw.js`: ejecución virtual y caché offline. `manifest.webmanifest` e `icon.svg`: instalación y apariencia de app.
+
+## Recuperación si falla el almacenamiento
+
+Si el navegador bloquea o cancela el guardado, la interfaz muestra «Solo esta sesión». Puedes continuar editando, probar HTML con CSS y scripts clásicos importados, y exportar tus proyectos. En ese modo, la navegación entre HTML, imports de módulos, fetch de recursos locales y CSS importado pueden no funcionar. Los cambios no son persistentes: exporta antes de cerrar. Nunca se borran automáticamente los proyectos para intentar reparar el almacenamiento.
