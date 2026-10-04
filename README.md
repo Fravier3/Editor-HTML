@@ -5,12 +5,12 @@ Editor y ejecutor de proyectos HTML, CSS y JavaScript para teléfono, tablet y P
 ## Publicar en GitHub Pages
 
 1. Descomprime el ZIP.
-2. Crea un repositorio en GitHub y sube **el contenido** de `HTML-Studio`: `index.html`, `app.js`, `style.css`, `sw.js`, `icon.svg`, `manifest.webmanifest` y este README a la raíz.
+2. Crea un repositorio en GitHub y sube **el contenido** de `HTML-Studio`: `index.html`, `app.js`, `style.css`, `sw.js`, `apple-touch-icon.png`, la carpeta `icons/`, `manifest.webmanifest` y este README a la raíz.
 3. En **Settings → Pages**, selecciona **Deploy from a branch**, rama **main**, carpeta **/(root)** y guarda.
 4. Abre el enlace HTTPS que te dé GitHub. En la primera visita la app activa su ejecutor; recarga si sigue mostrando «Vista simple».
 5. En iPhone, abre con Safari y usa **Compartir → Añadir a pantalla de inicio** para abrirla como app.
 
-No publiques el ZIP como único archivo: hay que extraerlo. No hace falta Android Studio, npm ni servidor propio. No se publica automáticamente desde esta entrega.
+No publiques el ZIP como único archivo: hay que extraerlo. No hace falta Android Studio, npm ni servidor propio. Este repositorio se publica en https://fravier3.github.io/Editor-HTML/.
 
 ## Uso
 
@@ -61,8 +61,14 @@ Abre `http://localhost:8000`. En GitHub Pages no necesitas este paso.
 
 ## Archivos
 
-`index.html`: interfaz. `style.css`: diseño responsive. `app.js`: edición, proyectos, IndexedDB, importación y exportación. `sw.js`: ejecución virtual y caché offline. `manifest.webmanifest` e `icon.svg`: instalación y apariencia de app.
+`index.html`: interfaz. `style.css`: diseño responsive. `app.js`: edición, proyectos, IndexedDB, importación y exportación. `sw.js`: ejecución virtual y caché offline. `manifest.webmanifest`, `apple-touch-icon.png` e `icons/`: instalación, logo e iconos PNG para iPhone y otros dispositivos.
 
 ## Recuperación si falla el almacenamiento
 
 Si el navegador bloquea o cancela el guardado, la interfaz muestra «Solo esta sesión». Puedes continuar editando, probar HTML con CSS y scripts clásicos importados, y exportar tus proyectos. En ese modo, la navegación entre HTML, imports de módulos, fetch de recursos locales y CSS importado pueden no funcionar. Los cambios no son persistentes: exporta antes de cerrar. Nunca se borran automáticamente los proyectos para intentar reparar el almacenamiento.
+
+## Icono y pantalla de inicio (v1.4)
+
+Abre https://fravier3.github.io/Editor-HTML/?v=20261004-6 en Safari. Pulsa **Compartir → Añadir a pantalla de inicio → Añadir**. El acceso se llama **HTML Studio**, muestra el icono azul y violeta y se abre como app independiente. Si ya tenías un acceso anterior, abre primero el nuevo enlace y vuelve a añadirlo para que iOS tome el icono actualizado.
+
+El icono para Apple es un PNG opaco de 180 × 180. El manifest incluye PNG de 192 y 512 píxeles y una variante maskable con margen de seguridad. Los archivos usan rutas relativas compatibles con la subcarpeta de GitHub Pages y se incluyen en la caché de la app. El nuevo logo aparece también en el encabezado.

@@ -13,3 +13,17 @@ body.focus-mode #workspace{position:fixed;inset:0 0 auto;height:var(--focus-heig
 #workspace[data-focus=code] #editor{font-size:max(var(--font),16px);padding-bottom:40px}
 #workspace[data-focus=code] #lines{font-size:max(var(--font),16px)}
 #workspace[data-focus=code] .editorTools{flex-wrap:wrap}
+
+/* App identity and safe areas when launched from the iPhone home screen. */
+.mark.app-logo{width:44px;height:44px;display:block;object-fit:cover;padding:0;background:none;flex-shrink:0;border-radius:11px}
+@media(max-width:800px){.mark.app-logo{width:36px;height:36px;border-radius:9px}}
+@media(display-mode:standalone){
+  header{height:calc(76px + env(safe-area-inset-top));padding-top:calc(12px + env(safe-area-inset-top));padding-left:max(22px,env(safe-area-inset-left));padding-right:max(22px,env(safe-area-inset-right))}
+  .shell{height:calc(100dvh - 76px - env(safe-area-inset-top));padding-bottom:env(safe-area-inset-bottom)}
+  @media(max-width:800px){
+    header{height:calc(66px + env(safe-area-inset-top));padding-top:calc(8px + env(safe-area-inset-top));padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+    .shell{height:calc(100dvh - 66px - env(safe-area-inset-top))}
+    aside{top:calc(66px + env(safe-area-inset-top));padding-bottom:calc(14px + env(safe-area-inset-bottom))}
+    #overlay{top:calc(66px + env(safe-area-inset-top))}
+  }
+}
